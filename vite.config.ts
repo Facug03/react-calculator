@@ -2,7 +2,7 @@ import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 
 const ReactCompilerConfig = {
-  compilationMode: 'annotation',
+  compilationMode: 'all',
 }
 
 // https://vitejs.dev/config/
@@ -11,7 +11,6 @@ export default defineConfig({
     react({
       babel: {
         plugins: [['babel-plugin-react-compiler', ReactCompilerConfig]],
-        retainLines: null,
       },
     }),
   ],
