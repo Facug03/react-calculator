@@ -10,7 +10,7 @@ interface Props {
 export function Button({ children, bgColor, color, gridVariant }: Props) {
   return (
     <button
-      className={`inline-flex items-center justify-center bg-slate-500 w-full h-12 rounded-full text-white font-semibold ${
+      className={`inline-flex items-center justify-center w-full h-16 rounded-full font-semibold text-lg ${
         bgColor && bgColors[bgColor]
       } ${color && colors[color]} ${gridVariant && grid[gridVariant]}`}
     >
