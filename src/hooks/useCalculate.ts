@@ -1,6 +1,6 @@
 import { useActionState } from 'react'
 
-async function changeInput(previousState: string, formData: any) {
+async function changeInput(previousState: string, formData: FormData) {
   console.log(previousState, formData)
   return previousState
 }
