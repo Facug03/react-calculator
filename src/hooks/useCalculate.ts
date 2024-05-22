@@ -1,5 +1,5 @@
 import { useState } from 'react'
-// import { splitNumbers } from '../utils/calculation'
+import { splitNumbers } from '../utils/calculation'
 
 export function useCalculate() {
   const [value, setValue] = useState('')
@@ -10,11 +10,26 @@ export function useCalculate() {
 
     if (buttonValue === '=') {
       try {
-        const result = eval(value)
-        setValue(result.toLocaleString('en-US'))
+        const result: number = eval(value)
+
+        const resultToString = result.toString()
+
+        console.log({ resultToString })
+
+        if (resultToString.includes('.')) {
+          const lastValue = resultToString.split('.').slice(-1)[0]
+
+          setValue(
+            result.toLocaleString('en-US', {
+              minimumFractionDigits:
+                lastValue.length > 10 ? 10 : lastValue.length,
+            })
+          )
+        } else {
+          setValue(result.toLocaleString('en-US'))
+        }
       } catch (error) {
         setError((prevState) => prevState + 1)
-        console.log('error')
       }
 
       return
@@ -28,39 +43,26 @@ export function useCalculate() {
 
     if (buttonValue === '<-') {
       if (value.length > 0) setValue((value) => value.slice(0, -1))
+
       return
     }
 
     if (!isNaN(Number(buttonValue))) {
-      const splitValues = newValue.split(/([^\d,.]+)/)
-      console.log({ splitValues })
-      // const lastValue = Number(
-      //   splitValues[splitValues.length - 1].replace(/,/g, '')
-      // ).toLocaleString('en-US', {
-      //   minimumFractionDigits: 1,
-      //   maximumFractionDigits: 10,
-      // })
-
+      const splitValues = splitNumbers(newValue)
       let lastValue = splitValues[splitValues.length - 1].replace(/,/g, '')
 
       if (
         lastValue.includes('.') &&
         lastValue.split('.').slice(-1)[0].length >= 1
       ) {
-        console.log(lastValue)
-
         lastValue = Number(lastValue).toLocaleString('en-US', {
-          minimumFractionDigits: 1,
-          maximumFractionDigits: 10,
+          minimumFractionDigits: lastValue.split('.').slice(-1)[0].length,
         })
-
-        console.log(lastValue)
       } else {
         lastValue = Number(lastValue).toLocaleString('en-US')
       }
 
       const joinValues = splitValues.slice(0, -1).concat(lastValue).join('')
-
       setValue(joinValues)
 
       return
@@ -70,7 +72,7 @@ export function useCalculate() {
 
     if (isNaN(Number(value[value.length - 1])) && value.length > 0) return
 
-    const splitValues = value.split(/([^\d,.]+)/)
+    const splitValues = splitNumbers(value)
     const lastValue = splitValues[splitValues.length - 1]
 
     if (buttonValue === '.' && lastValue.includes('.')) return
