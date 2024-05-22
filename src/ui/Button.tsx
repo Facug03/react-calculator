@@ -8,13 +8,7 @@ interface Props {
   gridVariant?: keyof typeof grid
 }
 
-export function Button({
-  children,
-  onClick,
-  bgColor,
-  color,
-  gridVariant,
-}: Props) {
+export function Button({ children, onClick, bgColor, color, gridVariant }: Props) {
   return (
     <button
       className={`inline-flex items-center justify-center w-full h-16 rounded-full font-semibold text-lg active:text-base transition-all ${

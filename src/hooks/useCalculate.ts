@@ -10,9 +10,7 @@ export function useCalculate() {
 
     if (buttonValue === '=') {
       try {
-        const formatedValue = splitNumbers(value)
-          .map(stringToNumberFormat)
-          .join('')
+        const formatedValue = splitNumbers(value).map(stringToNumberFormat).join('')
         const result: number = eval(formatedValue)
 
         const resultToString = result.toString()
@@ -22,8 +20,7 @@ export function useCalculate() {
 
           setValue(
             result.toLocaleString('en-US', {
-              minimumFractionDigits:
-                lastValue.length > 10 ? 10 : lastValue.length,
+              minimumFractionDigits: lastValue.length > 10 ? 10 : lastValue.length,
             })
           )
         } else {
@@ -52,10 +49,7 @@ export function useCalculate() {
       const splitValues = splitNumbers(newValue)
       let lastValue = stringToNumberFormat(splitValues[splitValues.length - 1])
 
-      if (
-        lastValue.includes('.') &&
-        lastValue.split('.').slice(-1)[0].length >= 1
-      ) {
+      if (lastValue.includes('.') && lastValue.split('.').slice(-1)[0].length >= 1) {
         lastValue = Number(lastValue).toLocaleString('en-US', {
           minimumFractionDigits: lastValue.split('.').slice(-1)[0].length,
         })
