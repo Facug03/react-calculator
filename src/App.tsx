@@ -8,7 +8,7 @@ function App() {
 
   return (
     <main className='grid place-content-center w-full h-screen'>
-      <form className='flex flex-col justify-center gap-10 border border-slate-950 h-[550px] py-2 px-5 bg-slate-950 rounded-xl max-w-80 relative'>
+      <form className='flex flex-col justify-center gap-10 border border-slate-950 outline outline-gray-400 outline-[0.5px] outline-offset-8 h-[550px] py-2 px-5 bg-slate-950 rounded-xl max-w-80 relative'>
         <div className='flex items-center h-20'>
           <input
             name='calculation'
