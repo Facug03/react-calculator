@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { splitNumbers } from '../utils/calculation'
+import { splitNumbers, stringToNumberFormat } from '../utils/calculation'
 
 export function useCalculate() {
   const [value, setValue] = useState('')
@@ -10,11 +10,12 @@ export function useCalculate() {
 
     if (buttonValue === '=') {
       try {
-        const result: number = eval(value)
+        const formatedValue = splitNumbers(value)
+          .map(stringToNumberFormat)
+          .join('')
+        const result: number = eval(formatedValue)
 
         const resultToString = result.toString()
-
-        console.log({ resultToString })
 
         if (resultToString.includes('.')) {
           const lastValue = resultToString.split('.').slice(-1)[0]
@@ -49,7 +50,7 @@ export function useCalculate() {
 
     if (!isNaN(Number(buttonValue))) {
       const splitValues = splitNumbers(newValue)
-      let lastValue = splitValues[splitValues.length - 1].replace(/,/g, '')
+      let lastValue = stringToNumberFormat(splitValues[splitValues.length - 1])
 
       if (
         lastValue.includes('.') &&
