@@ -5,8 +5,8 @@ export const grid = {
 }
 
 export const bgColors = {
-  primary: 'bg-slate-800',
-  secondary: 'bg-slate-600',
+  primary: 'bg-slate-800 active:bg-slate-700',
+  secondary: 'bg-slate-600 active:bg-slate-500',
 }
 
 export const colors = {

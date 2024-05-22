@@ -17,7 +17,7 @@ export function Button({
 }: Props) {
   return (
     <button
-      className={`inline-flex items-center justify-center w-full h-16 rounded-full font-semibold text-lg ${
+      className={`inline-flex items-center justify-center w-full h-16 rounded-full font-semibold text-lg active:text-base transition-all ${
         bgColor && bgColors[bgColor]
       } ${color && colors[color]} ${gridVariant && grid[gridVariant]}`}
       onClick={(e) => {
