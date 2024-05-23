@@ -3,10 +3,10 @@ export default {
   printWidth: 120,
   semi: false,
   singleQuote: true,
-  quoteProps: "consistent",
+  quoteProps: 'consistent',
   tabWidth: 2,
-  trailingComma: "es5",
+  trailingComma: 'es5',
   useTabs: false,
-  endOfLine: "lf",
-  arrowParens: "always",
-};
+  endOfLine: 'lf',
+  arrowParens: 'always',
+}
