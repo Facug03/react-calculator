@@ -7,72 +7,69 @@ export function useCalculate() {
 
   const onClick = (buttonValue: string) => {
     const newValue = value + buttonValue
-
-    if (buttonValue === '=') {
-      try {
-        const formatedValue = splitNumbers(value).map(stringToNumberFormat).join('')
-        const result: number = eval(formatedValue)
-
-        const resultToString = result.toString()
-
-        if (resultToString.includes('.')) {
-          const lastValue = resultToString.split('.').slice(-1)[0]
-
-          setValue(
-            result.toLocaleString('en-US', {
-              minimumFractionDigits: lastValue.length > 10 ? 10 : lastValue.length,
-            })
-          )
-        } else {
-          setValue(result.toLocaleString('en-US'))
-        }
-      } catch (error) {
-        setError((prevState) => prevState + 1)
-      }
-
-      return
-    }
-
-    if (buttonValue === 'C') {
-      setValue('')
-
-      return
-    }
-
-    if (buttonValue === '<-') {
-      if (value.length > 0) setValue((value) => value.slice(0, -1))
-
-      return
-    }
-
-    if (!isNaN(Number(buttonValue))) {
-      const splitValues = splitNumbers(newValue)
-      let lastValue = stringToNumberFormat(splitValues[splitValues.length - 1])
-
-      if (lastValue.includes('.') && lastValue.split('.').slice(-1)[0].length >= 1) {
-        lastValue = Number(lastValue).toLocaleString('en-US', {
-          minimumFractionDigits: lastValue.split('.').slice(-1)[0].length,
-        })
-      } else {
-        lastValue = Number(lastValue).toLocaleString('en-US')
-      }
-
-      const joinValues = splitValues.slice(0, -1).concat(lastValue).join('')
-      setValue(joinValues)
-
-      return
-    }
-
-    if (value.length === 0) return
-
-    if (isNaN(Number(value[value.length - 1])) && value.length > 0) return
-
     const splitValues = splitNumbers(value)
-    const lastValue = splitValues[splitValues.length - 1]
 
-    if (buttonValue === '.' && lastValue.includes('.')) return
+    switch (true) {
+      case buttonValue === 'C':
+        setValue('')
+        break
 
-    setValue(newValue)
+      case buttonValue === '<-':
+        setValue((value) => value.slice(0, -1))
+        break
+
+      case buttonValue === '=':
+        try {
+          const formatedValue = splitValues.map(stringToNumberFormat).join('')
+          const result: number = eval(formatedValue)
+          const resultToString = result.toString()
+
+          if (resultToString.includes('.')) {
+            const lastValue = resultToString.split('.').slice(-1)[0]
+
+            setValue(
+              result.toLocaleString('en-US', {
+                minimumFractionDigits: lastValue.length > 10 ? 10 : lastValue.length,
+              })
+            )
+          } else {
+            setValue(result.toLocaleString('en-US'))
+          }
+        } catch (error) {
+          setError((prevState) => prevState + 1)
+        }
+        break
+
+      case !isNaN(Number(buttonValue)):
+        {
+          const splitNewValues = splitNumbers(newValue)
+          let lastValue = stringToNumberFormat(splitNewValues[splitNewValues.length - 1])
+
+          if (lastValue.includes('.') && lastValue.split('.').slice(-1)[0].length >= 1) {
+            lastValue = Number(lastValue).toLocaleString('en-US', {
+              minimumFractionDigits: lastValue.split('.').slice(-1)[0].length,
+            })
+          } else {
+            lastValue = Number(lastValue).toLocaleString('en-US')
+          }
+
+          const joinValues = splitNewValues.slice(0, -1).concat(lastValue).join('')
+          setValue(joinValues)
+        }
+        break
+
+      case value.length === 0:
+        break
+
+      case isNaN(Number(value[value.length - 1])) && value.length > 0:
+        break
+
+      case buttonValue === '.' && splitValues[splitValues.length - 1].includes('.'):
+        break
+
+      default:
+        setValue(newValue)
+    }
   }
 
   return { value, onClick, error }
