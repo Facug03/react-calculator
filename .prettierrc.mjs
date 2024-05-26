@@ -9,4 +9,5 @@ export default {
   useTabs: false,
   endOfLine: 'lf',
   arrowParens: 'always',
+  jsxSingleQuote: true,
 }
