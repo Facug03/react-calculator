@@ -15,6 +15,7 @@ function App() {
             className='block bg-transparent outline-none cursor-default pointer-events-none text-white text-3xl w-full text-right'
             value={value}
             readOnly
+            type='text'
           />
           <span className='text-white text-3xl animate-blink'>|</span>
         </div>
