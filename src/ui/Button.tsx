@@ -1,7 +1,7 @@
 import { colors, bgColors, grid } from '../consts/styles'
+import { PropsWithChildren } from 'react'
 
-interface Props {
-  children: React.ReactNode
+interface Props extends PropsWithChildren {
   onClick: (value: string) => void
   color?: keyof typeof colors
   bgColor?: keyof typeof bgColors
