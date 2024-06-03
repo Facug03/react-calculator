@@ -7,22 +7,22 @@ function App() {
   const ref = useToast(error)
 
   return (
-    <main className='grid place-content-center w-full h-screen'>
-      <form className='flex flex-col justify-center gap-10 border border-slate-950 outline outline-gray-400 outline-[0.5px] outline-offset-8 h-[550px] py-2 px-5 bg-slate-950 rounded-xl max-w-80 relative'>
-        <div className='flex items-center h-20'>
+    <main className='grid h-screen w-full place-content-center'>
+      <form className='relative flex h-[550px] max-w-80 flex-col justify-center gap-10 rounded-xl border border-slate-950 bg-slate-950 px-5 py-2 outline outline-[0.5px] outline-offset-8 outline-gray-400'>
+        <div className='flex h-20 items-center'>
           <input
             name='calculation'
-            className='block bg-transparent outline-none cursor-default pointer-events-none text-white text-3xl w-full text-right'
+            className='pointer-events-none block w-full cursor-default bg-transparent text-right text-3xl text-white outline-none'
             value={value}
             readOnly
             type='text'
           />
-          <span className='text-white text-3xl animate-blink'>|</span>
+          <span className='animate-blink text-3xl text-white'>|</span>
         </div>
 
         <hr />
 
-        <section className='grid grid-cols-4 gap-1 items-baseline'>
+        <section className='grid grid-cols-4 items-baseline gap-1'>
           <Button onClick={onClick} bgColor='secondary' color='danger'>
             C
           </Button>
@@ -84,12 +84,12 @@ function App() {
         </section>
 
         <div
-          className='max-w-xs bg-gray-500 text-sm text-white rounded-3xl shadow-lg absolute bottom-10 translate-x-1/2 transition duration-300 ease-in-out pointer-events-none'
+          className='pointer-events-none absolute bottom-10 max-w-xs translate-x-1/2 rounded-3xl bg-gray-500 text-sm text-white shadow-lg transition duration-300 ease-in-out'
           style={{ opacity: 0 }}
           role='alert'
           ref={ref}
         >
-          <div className='flex py-2 px-4'>Formato inválido.</div>
+          <div className='flex px-4 py-2'>Formato inválido.</div>
         </div>
       </form>
     </main>

@@ -11,7 +11,7 @@ interface Props extends PropsWithChildren {
 export function Button({ children, onClick, bgColor, color, gridVariant }: Props) {
   return (
     <button
-      className={`inline-flex items-center justify-center w-full h-16 rounded-full font-semibold text-lg active:text-base transition-all ${
+      className={`inline-flex h-16 w-full items-center justify-center rounded-full text-lg font-semibold transition-all active:text-base ${
         bgColor && bgColors[bgColor]
       } ${color && colors[color]} ${gridVariant && grid[gridVariant]}`}
       onClick={(e) => {
