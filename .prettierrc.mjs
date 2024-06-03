@@ -10,4 +10,5 @@ export default {
   endOfLine: 'lf',
   arrowParens: 'always',
   jsxSingleQuote: true,
+  plugins: ['prettier-plugin-tailwindcss'],
 }
