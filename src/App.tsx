@@ -7,8 +7,8 @@ function App() {
   const ref = useToast(error)
 
   return (
-    <main className='grid h-screen w-full place-content-center'>
-      <form className='relative flex h-[550px] max-w-80 flex-col justify-center gap-10 rounded-xl border border-slate-950 bg-slate-950 px-5 py-2 outline outline-[0.5px] outline-offset-8 outline-gray-400'>
+    <main className='grid h-dvh place-content-center'>
+      <div className='relative flex h-[550px] max-w-80 flex-col justify-center gap-10 rounded-xl border border-slate-950 bg-slate-950 px-5 py-2 outline outline-[0.5px] outline-offset-8 outline-gray-400'>
         <div className='flex h-20 items-center'>
           <input
             name='calculation'
@@ -91,7 +91,7 @@ function App() {
         >
           <div className='flex px-4 py-2'>Formato inválido.</div>
         </div>
-      </form>
+      </div>
     </main>
   )
 }
