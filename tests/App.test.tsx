@@ -60,7 +60,7 @@ describe('App', () => {
     expect(input).toHaveValue('')
   })
 
-  it('should clear the input when the <- button is clicked', async () => {
+  it('should remove the last character in the input when the <- button is clicked', async () => {
     const { input, backSpaceButton } = renderComponent()
 
     const numButton = screen.getByRole('button', { name: /9/i })
